@@ -6,12 +6,14 @@ def create_vectorstore(docs):
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     chunks = splitter.split_documents(docs)
 
+    # ✅ Correct way to load on CPU
     embeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2",
-        model_kwargs={"device": "cpu"}
+        encode_kwargs={"device": "cpu"}
     )
 
     vectorstore = FAISS.from_documents(chunks, embeddings)
     return vectorstore
+
 
 
