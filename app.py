@@ -64,7 +64,7 @@ question = st.text_input("❓ Ask me a question")
 
 if question:
     retriever = st.session_state.vectorstore.as_retriever(search_kwargs={"k": 3})
-    related_docs = retriever.get_relevant_documents(question)
+    related_docs = retriever.invoke(question)
 
     context = "\n\n".join([d.page_content for d in related_docs])
     answer = ask_deepseek(question, context)
@@ -74,4 +74,5 @@ if question:
 
     #with st.expander("📚 Contexto usado"):
     #   st.write(context)
+
 
