@@ -37,7 +37,7 @@ with st.sidebar:
     st.subheader("🤖 AI Projects")
     st.markdown("🈴 [Mandarin Assistant](https://mandarinasistant-iprh8589emshqy6oeoayte.streamlit.app/)")
     st.markdown("💹 [Tradex](https://tradexgit-kmwf9rlefbrvroiq7ukzrn.streamlit.app/)")
-    st.markdown("📊 [AI + Spreadsheet analyzer](https://finan-analysis22.streamlit.app/)")
+    st.markdown("📊 [AI + Spreadsheet analyzer](https://analyzer2-kaezar22.streamlit.app/)")
     
     
 
@@ -74,5 +74,6 @@ if question:
 
     #with st.expander("📚 Contexto usado"):
     #   st.write(context)
+
 
 
