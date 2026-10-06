@@ -81,6 +81,10 @@ T = {
         "watch": "Watch the video",
         "video_badge": "Video showcase",
         "fun_title": "Other fun projects",
+        "music_kicker": "Beyond work",
+        "music_title": "My music",
+        "music_lead": "I produce and play electronic music. These are my channels and playlists.",
+        "listen": "Listen on YouTube",
         "chat_kicker": "Cesar-Bot",
         "chat_title": "Ask my AI about my background",
         "chat_lead": "A chatbot that answers from my CV and profile. Ask about my experience, skills or projects.",
@@ -158,6 +162,10 @@ T = {
         "watch": "Ver el video",
         "video_badge": "Demostración en video",
         "fun_title": "Otros proyectos por gusto",
+        "music_kicker": "Más allá del trabajo",
+        "music_title": "Mi música",
+        "music_lead": "Produzco y toco música electrónica. Estos son mis canales y listas de reproducción.",
+        "listen": "Escuchar en YouTube",
         "chat_kicker": "Cesar-Bot",
         "chat_title": "Pregúntale a mi IA sobre mi trayectoria",
         "chat_lead": "Un chatbot que responde con base en mi CV y mi perfil. Pregunte por mi experiencia, habilidades o proyectos.",
@@ -269,15 +277,32 @@ PROJECTS = [
     },
 ]
 
+# Music cards. "style" picks the colour of the card cover: techno, moombahton or lofi.
+MUSIC = [
+    {
+        "url": "https://youtube.com/playlist?list=PLHQPPWTfjs1c&si=CGduQuCdvgCtxKbx",
+        "style": "techno",
+        "en": ("Techno live sets", "Live sets I play and record with my own hardware.", "Playlist · YouTube"),
+        "es": ("Live sets de techno", "Sets en vivo que toco y grabo con mis propios equipos.", "Lista de reproducción · YouTube"),
+    },
+    {
+        "url": "https://youtube.com/playlist?list=PLu6Srx39DksgbieLwZfEEdEGH6Od_NnIW&si=4V_7bzl5YubwmWOv",
+        "style": "moombahton",
+        "en": ("Moombahton tracks", "My own moombahton productions.", "Playlist · YouTube"),
+        "es": ("Tracks de moombahton", "Mis propias producciones de moombahton.", "Lista de reproducción · YouTube"),
+    },
+    {
+        "url": "https://www.youtube.com/@StillWaterLo-fi_music",
+        "style": "lofi",
+        "en": ("Still Water Lo-fi", "My lo-fi channel: calm music for sleeping and unwinding.", "Channel · YouTube"),
+        "es": ("Still Water Lo-fi", "Mi canal de lo-fi: música tranquila para dormir y relajarse.", "Canal · YouTube"),
+    },
+]
+
 FUN = [
     {
         "url": "https://vimeo.com/user83238836",
         "en": ("Emerald Portfolio Designing", "Video · Vimeo"),
         "es": ("Diseño de portafolio de esmeraldas", "Video · Vimeo"),
-    },
-    {
-        "url": "https://youtube.com/playlist?list=PLu6Srx39DksgbieLwZfEEdEGH6Od_NnIW&si=tuW7tz66p97z2p6g",
-        "en": ("My Music Channel", "Playlist · YouTube"),
-        "es": ("Mi canal de música", "Lista de reproducción · YouTube"),
     },
 ]

@@ -4,7 +4,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from content import CV_FILES, EMAIL, FUN, GITHUB, LINKEDIN, PROJECTS, T
+from content import CV_FILES, EMAIL, FUN, GITHUB, LINKEDIN, MUSIC, PROJECTS, T
 
 ROOT = Path(__file__).parent
 
@@ -108,7 +108,21 @@ a.cs-card:hover .cs-cta{color:var(--accent-dark);}
 .cs-cta i{font-style:normal;display:inline-block;transition:transform .18s ease;margin-left:.25rem;}
 a.cs-card:hover .cs-cta i{transform:translateX(4px);}
 
-.cs-fun{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-top:1.2rem;}
+a.cs-music{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none !important;color:var(--ink) !important;transition:transform .18s ease,box-shadow .18s ease;}
+a.cs-music:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(15,30,46,.14);}
+a.cs-music:focus-visible{outline:3px solid var(--accent);outline-offset:3px;}
+.cs-wave{position:relative;height:150px;display:flex;align-items:center;gap:4px;padding:0 1.4rem;background:var(--navy);}
+.cs-wave i{flex:1;border-radius:3px;background:var(--wave);opacity:.9;}
+.cs-music-techno .cs-wave{--wave:#5EE6D0;background:radial-gradient(420px 220px at 90% 0%,rgba(110,80,230,.75),transparent 65%),#0D1626;}
+.cs-music-moombahton .cs-wave{--wave:#FFC857;background:radial-gradient(420px 220px at 90% 0%,rgba(230,70,110,.75),transparent 65%),#24121C;}
+.cs-music-lofi .cs-wave{--wave:#BFD9F2;background:radial-gradient(420px 220px at 90% 0%,rgba(70,130,190,.7),transparent 65%),#14263A;}
+.cs-music-lofi .cs-wave i{transform:scaleY(.55);}
+.cs-play{z-index:2;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.1rem;padding-left:4px;box-shadow:0 8px 22px rgba(0,0,0,.35);transition:transform .18s ease;}
+a.cs-music:hover .cs-play{transform:translate(-50%,-50%) scale(1.1);}
+a.cs-music h3{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:1.28rem;line-height:1.2;color:var(--ink);margin:0 0 .5rem;padding:0;}
+a.cs-music p{font-size:.93rem;line-height:1.55;color:var(--muted);margin:0 0 .9rem;}
+a.cs-music:hover .cs-cta i{transform:translateX(4px);}
+.cs-fun{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-top:1.2rem;}
 a.cs-funitem{display:flex;justify-content:space-between;align-items:center;gap:1rem;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.3rem;text-decoration:none !important;color:var(--ink) !important;transition:border-color .18s ease,box-shadow .18s ease;}
 a.cs-funitem:hover{border-color:var(--accent);box-shadow:0 10px 24px rgba(15,30,46,.08);}
 .cs-funitem b{display:block;font-weight:600;font-size:1.02rem;}
@@ -304,13 +318,33 @@ html(
     "</section>"
 )
 
+bars = "".join(f'<i style="height:{18 + (i * 37) % 71}%"></i>' for i in range(28))
+music_cards = "".join(
+    f'<a class="cs-music cs-music-{item["style"]}" href="{escape(item["url"])}" target="_blank" rel="noopener">'
+    f'<div class="cs-wave"><span class="cs-play">▶</span>{bars}</div>'
+    '<div class="cs-body">'
+    f'<div class="cs-tag">{item[lang][2]}</div><h3>{item[lang][0]}</h3><p>{item[lang][1]}</p>'
+    f'<div class="cs-cta">{t["listen"]}<i>→</i></div>'
+    "</div></a>"
+    for item in MUSIC
+)
+html(
+    '<span id="music" class="cs-anchor"></span>'
+    '<section class="cs-section">'
+    f'<div class="cs-kicker">{t["music_kicker"]}</div>'
+    f'<h2>{t["music_title"]}</h2>'
+    f'<p class="cs-note">{t["music_lead"]}</p>'
+    f'<div class="cs-grid">{music_cards}</div>'
+    "</section>"
+)
+
 fun_items = "".join(
     f'<a class="cs-funitem" href="{escape(item["url"])}" target="_blank" rel="noopener">'
     f"<div><b>{item[lang][0]}</b><span>{item[lang][1]}</span></div><i>→</i></a>"
     for item in FUN
 )
 html(
-    '<section class="cs-section" style="padding-top:2.6rem">'
+    '<section class="cs-section" style="padding-top:2.2rem">'
     f'<h2 style="font-size:1.4rem">{t["fun_title"]}</h2>'
     f'<div class="cs-fun">{fun_items}</div>'
     "</section>"
