@@ -25,7 +25,7 @@ if "lang" not in st.session_state:
 
 @st.cache_data(show_spinner=False)
 def image_uri(name: str) -> str:
-    data = (ROOT / "assets" / "projects" / name).read_bytes()
+    data = (ROOT / "assets" / name).read_bytes()
     return "data:image/jpeg;base64," + base64.b64encode(data).decode()
 
 
@@ -61,10 +61,14 @@ html{scroll-behavior:smooth;}
 .cs-nav a{color:var(--ink);text-decoration:none;font-size:.95rem;font-weight:500;}
 .cs-nav a:hover{color:var(--accent);}
 
-.cs-hero{padding:3.2rem 0 1.2rem;max-width:880px;}
+.cs-hero{padding:3rem 0 1.4rem;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:3.5rem;align-items:center;}
+.cs-photo{position:relative;}
+.cs-photo:before{content:"";position:absolute;inset:14px -14px -14px 14px;border:2px solid var(--accent);border-radius:18px;}
+.cs-photo img{position:relative;display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;box-shadow:0 22px 50px rgba(15,30,46,.22);}
+.stApp .cs-hero p.cs-tagline{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(1.3rem,2.3vw,1.75rem);line-height:1.25;letter-spacing:-.01em;color:var(--ink);margin:0 0 1.1rem;max-width:640px;}
 .cs-eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
-.cs-hero h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(2.1rem,4.6vw,3.5rem);line-height:1.08;letter-spacing:-.02em;color:var(--ink);margin:0 0 1.3rem;padding:0;}
-.cs-lead{font-size:1.14rem;line-height:1.65;color:var(--muted);max-width:720px;margin:0;}
+.cs-hero h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(2.9rem,7vw,5.2rem);line-height:1;letter-spacing:-.03em;color:var(--ink);margin:0 0 1.1rem;padding:0;}
+.cs-lead{font-size:1.08rem;line-height:1.65;color:var(--muted);max-width:640px;margin:0;}
 
 .cs-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:2.2rem 0 1rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
 .cs-stat{padding:1.4rem 1.2rem 1.4rem 0;}
@@ -134,6 +138,8 @@ div[role="radiogroup"]{justify-content:flex-end;gap:.9rem;}
 .st-key-chatbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.5rem 1.5rem 1.2rem;margin-top:1.2rem;}
 
 @media (max-width:900px){
+  .cs-hero{grid-template-columns:1fr;gap:2rem;}
+  .cs-photo{order:-1;max-width:260px;}
   .cs-services,.cs-grid{grid-template-columns:1fr 1fr;}
   .cs-stats{grid-template-columns:1fr 1fr;}
   .cs-stat:nth-child(3){padding-left:0;border-left:0;}
@@ -144,6 +150,7 @@ div[role="radiogroup"]{justify-content:flex-end;gap:.9rem;}
   .cs-services,.cs-grid,.cs-fun{grid-template-columns:1fr;}
   .cs-nav{justify-content:flex-start;gap:1.1rem;}
   .cs-hero{padding-top:1.8rem;}
+  .cs-photo{max-width:230px;margin-right:14px;}
   .cs-contact{padding:2rem 1.4rem .8rem;}
 }
 </style>
@@ -205,11 +212,20 @@ def cta_row(prefix: str) -> None:
 # -------------------------------
 # 📌 Hero
 # -------------------------------
+photo = (
+    f'<div class="cs-photo"><img src="{image_uri("profile.jpg")}" alt="César Salgado"></div>'
+    if (ROOT / "assets" / "profile.jpg").exists()
+    else ""
+)
 html(
     '<section class="cs-hero">'
+    "<div>"
     f'<div class="cs-eyebrow">{t["eyebrow"]}</div>'
-    f'<h1>{t["h1"]}</h1>'
+    '<h1>César Salgado</h1>'
+    f'<p class="cs-tagline">{t["h1"]}</p>'
     f'<p class="cs-lead">{t["lead"]}</p>'
+    "</div>"
+    f"{photo}"
     "</section>"
 )
 cta_row("hero")
@@ -266,7 +282,7 @@ def project_card(project: dict) -> str:
 
     badge = f'<span class="cs-badge">▶ {t["video_badge"]}</span>' if is_video else ""
     inner = (
-        f'<div class="cs-img"><img src="{image_uri(project["image"])}" alt="{escape(p["title"])}" loading="lazy">{badge}</div>'
+        f'<div class="cs-img"><img src="{image_uri("projects/" + project["image"])}" alt="{escape(p["title"])}" loading="lazy">{badge}</div>'
         '<div class="cs-body">'
         f'<div class="cs-tag">{p["tag"]}</div><h3>{p["title"]}</h3>{text}'
         + (f'<div class="cs-cta">{cta}<i>{"↓" if internal else "→"}</i></div>' if url else "")
