@@ -355,7 +355,7 @@ with chat_slot:
     from utils.llm import ask_deepseek
 
     # Inicializar
-    FILE_PATHS = ["data/Profile.pdf", "data/summary.txt"]
+    FILE_PATHS = ["data/Profile.pdf", "data/summary.txt", "assets/cv/CV_Cesar_Salgado_EN.pdf"]
 
     if "vectorstore" not in st.session_state:
         with st.spinner(t["chat_loading"]):
@@ -366,7 +366,7 @@ with chat_slot:
     question = st.text_input(t["chat_input"])
 
     if question:
-        retriever = st.session_state.vectorstore.as_retriever(search_kwargs={"k": 3})
+        retriever = st.session_state.vectorstore.as_retriever(search_kwargs={"k": 5})
         related_docs = retriever.invoke(question)
 
         context = "\n\n".join([d.page_content for d in related_docs])
