@@ -1,7 +1,9 @@
+import streamlit as st
 from openai import OpenAI
 
-# ⚠️ Poner aquí tu API key de DeepSeek directamente
-DEEPSEEK_API_KEY = "sk-900f90f072b349d8ba65e95e1eabb2ff"
+# La API key se lee de los secrets de Streamlit (.streamlit/secrets.toml en local,
+# "Secrets" en la configuración de la app en Streamlit Cloud).
+DEEPSEEK_API_KEY = st.secrets["DEEPSEEK_API_KEY"]
 
 client = OpenAI(
     api_key=DEEPSEEK_API_KEY,
