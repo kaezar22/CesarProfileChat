@@ -237,13 +237,13 @@ PROJECTS = [
             "tag": "AI · Education",
             "title": "Mandarin Assistant",
             "problem": "Generic translators answer with words a beginner has not studied yet, which confuses students more than it helps them.",
-            "solution": "Translates phrases and answers grammar questions using only the vocabulary of the Chinese course, so every answer is something the student can already read.",
+            "solution": "Students pick their level and the vocabulary lists to review, then practice translations, grammar, listening and mock exams built only from the words of their course.",
         },
         "es": {
             "tag": "IA · Educación",
             "title": "Asistente de Mandarín",
             "problem": "Los traductores genéricos responden con palabras que un principiante todavía no ha estudiado, y eso confunde más de lo que ayuda.",
-            "solution": "Traduce frases y resuelve dudas de gramática usando solo el vocabulario del curso de chino, de modo que el estudiante puede leer cada respuesta.",
+            "solution": "El estudiante elige su nivel y los vocabularios que quiere repasar, y practica traducciones, gramática, listening y exámenes de prueba armados solo con las palabras de su curso.",
         },
     },
     {
