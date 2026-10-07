@@ -61,7 +61,7 @@ html{scroll-behavior:smooth;}
 .cs-nav a{color:var(--ink);text-decoration:none;font-size:.95rem;font-weight:500;}
 .cs-nav a:hover{color:var(--accent);}
 
-.cs-hero{padding:3rem 0 1.4rem;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:3.5rem;align-items:center;}
+.cs-hero{padding:3rem 0 1.4rem;display:grid;grid-template-columns:minmax(0,1fr);}
 .cs-photo{position:relative;}
 .cs-photo:before{content:"";position:absolute;inset:14px -14px -14px 14px;border:2px solid var(--accent);border-radius:18px;}
 .cs-photo img{position:relative;display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;box-shadow:0 22px 50px rgba(15,30,46,.22);}
@@ -103,6 +103,7 @@ a.cs-card:hover .cs-img img{transform:scale(1.035);}
 .cs-card h3{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:1.28rem;line-height:1.2;color:var(--ink);margin:0 0 .85rem;padding:0;}
 .cs-label{font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#8A8F8B;margin:0 0 .2rem;}
 .cs-card p{font-size:.93rem;line-height:1.55;color:var(--muted);margin:0 0 .9rem;}
+.cs-flag{align-self:flex-start;font-size:1.02rem;font-weight:700;color:#7A4A00;background:#FFF1CC;border:1px solid #F0C45A;border-radius:8px;padding:.4rem .75rem;margin:0 0 1rem;}
 .cs-cta{margin-top:auto;padding-top:.3rem;font-weight:600;font-size:.95rem;color:var(--accent);}
 a.cs-card:hover .cs-cta{color:var(--accent-dark);}
 .cs-cta i{font-style:normal;display:inline-block;transition:transform .18s ease;margin-left:.25rem;}
@@ -174,7 +175,7 @@ div[role="radiogroup"]{justify-content:flex-end;gap:.9rem;}
 # -------------------------------
 # 📌 Top bar
 # -------------------------------
-bar_left, bar_mid, bar_right = st.columns([3, 6, 2], vertical_alignment="center")
+_, bar_mid, bar_right = st.columns([3, 6, 2], vertical_alignment="center")
 with bar_right:
     st.radio(
         "Language / Idioma",
@@ -189,8 +190,6 @@ lang = st.session_state.lang
 st.query_params["lang"] = lang
 t = T[lang]
 
-with bar_left:
-    html('<div class="cs-brand">César Salgado<span>.</span></div>')
 with bar_mid:
     html(
         '<nav class="cs-nav">'
@@ -226,11 +225,6 @@ def cta_row(prefix: str) -> None:
 # -------------------------------
 # 📌 Hero
 # -------------------------------
-photo = (
-    f'<div class="cs-photo"><img src="{image_uri("profile.jpg")}" alt="César Salgado"></div>'
-    if (ROOT / "assets" / "profile.jpg").exists()
-    else ""
-)
 html(
     '<section class="cs-hero">'
     "<div>"
@@ -239,7 +233,6 @@ html(
     f'<p class="cs-tagline">{t["h1"]}</p>'
     f'<p class="cs-lead">{t["lead"]}</p>'
     "</div>"
-    f"{photo}"
     "</section>"
 )
 cta_row("hero")
@@ -286,6 +279,9 @@ def project_card(project: dict) -> str:
             f'<div class="cs-label">{t["problem"]}</div><p>{p["problem"]}</p>'
             f'<div class="cs-label">{t["solution"]}</div><p>{p["solution"]}</p>'
         )
+
+    if "note" in p:
+        text += f'<div class="cs-flag">⚠ {p["note"]}</div>'
 
     if is_video:
         cta = t["watch"]

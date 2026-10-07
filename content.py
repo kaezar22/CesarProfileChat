@@ -219,13 +219,15 @@ PROJECTS = [
             "tag": "AI · Business intelligence",
             "title": "AI financial analyzer",
             "problem": "Income and expenses end up in a spreadsheet that nobody analyzes, and every answer means building formulas or asking an analyst.",
-            "solution": "Record each movement in a form, follow income and spending in a dashboard, and ask questions in a chat that answers with a chart. The data lives in Google Sheets. The demo runs on fictional numbers.",
+            "solution": "Record each movement in a form, follow income and spending in a dashboard, and ask questions in a chat that answers with a chart. The data lives in Google Sheets.",
+            "note": "Demo with fictional numbers",
         },
         "es": {
             "tag": "IA · Inteligencia de negocios",
             "title": "Analizador financiero con IA",
             "problem": "Los ingresos y gastos terminan en una hoja de cálculo que nadie analiza, y cada respuesta exige armar fórmulas o pedírsela a un analista.",
-            "solution": "Registre cada movimiento en un formulario, siga ingresos y gastos en un tablero y haga preguntas en un chat que responde con un gráfico. Los datos viven en Google Sheets. La demo usa cifras ficticias.",
+            "solution": "Registre cada movimiento en un formulario, siga ingresos y gastos en un tablero y haga preguntas en un chat que responde con un gráfico. Los datos viven en Google Sheets.",
+            "note": "Demo con cifras ficticias",
         },
     },
     {
